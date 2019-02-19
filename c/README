@@ -54,3 +54,4 @@ Use demo project as example. The format of coverage report file is like followin
 
 "-" means it's invalid line.
 "1" means the count of code line is executed.
+

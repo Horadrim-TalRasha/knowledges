@@ -35,6 +35,7 @@ $(BUILD_DIR_NAME)/%.o: %.c
 clean::
 	rm -rf $(BUILD_DIR_NAME) $(BIN) $(SHARE) $(ARCHIVE)
 
+
 cov : CFLAGS += -fprofile-arcs -ftest-coverage
 
 cov : LD_FLAGS += -fprofile-arcs -ftest-coverage

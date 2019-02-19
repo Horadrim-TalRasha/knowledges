@@ -5,12 +5,6 @@ ifdef TARGET
 	SUBDIRS = $(TARGET)
 endif
 
-ifdef COVERAGE
-ifeq ($(COVERAGE), "on")
-	echo "coverage was set"
-	CFLAGS += -fprofile-arcs -ftest-coverage
-endif
-endif
 
 all:
 ifdef SUBDIRS
@@ -54,3 +48,4 @@ ifdef SUBDIRS
 endif
 
 .PHONY: all clean cov
+
