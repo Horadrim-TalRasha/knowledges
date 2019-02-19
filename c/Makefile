@@ -5,6 +5,13 @@ ifdef TARGET
 	SUBDIRS = $(TARGET)
 endif
 
+ifdef COVERAGE
+ifeq ($(COVERAGE), "on")
+	echo "coverage was set"
+	CFLAGS += -fprofile-arcs -ftest-coverage
+endif
+endif
+
 all:
 ifdef SUBDIRS
 	@for dir in $(SUBDIRS) ;\
@@ -33,4 +40,17 @@ ifdef SUBDIRS
 endif
 
 
-.PHONY: all clean
+cov::
+ifdef SUBDIRS
+	@for dir in $(SUBDIRS) ;\
+	do\
+		if [ -d $$dir ] ;\
+		then \
+			make -C $$dir cov;\
+		else \
+			echo "$$dir not exist"; \
+		fi ;\
+	done
+endif
+
+.PHONY: all clean cov
