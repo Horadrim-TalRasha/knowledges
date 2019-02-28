@@ -24,17 +24,14 @@ static void * thread_pool_entry(void * thread_params)
 {
     while(is_thread_pool_running)
     {
-        printf("before mutex lock %u\n", (unsigned int)pthread_self());
         pthread_mutex_lock(&thread_pool_lock_);
-        printf("after mutex lock %u\n", (unsigned int)pthread_self());
 
         struct timespec abstime;
         clock_gettime(CLOCK_REALTIME, &abstime);
         int timeout = 10;
         abstime.tv_sec += timeout;
-
-        printf("before timed wait %u\n", (unsigned int)pthread_self());
         int timed_wait_ret = pthread_cond_timedwait(&thread_pool_cond_, &thread_pool_lock_, &abstime);
+
         if(timed_wait_ret == 0)
         {
             printf("thread: %u was awaken by pthread_cond_signal\n", (unsigned int)pthread_self());
@@ -54,13 +51,9 @@ static void * thread_pool_entry_2(void * thread_params)
 {
     while(is_thread_pool_running)
     {
-        printf("before mutex lock\n");
         pthread_mutex_lock(&thread_pool_lock_);
-        printf("after mutex lock\n");
-
-        printf("before wait\n");
         pthread_cond_wait(&thread_pool_cond_, &thread_pool_lock_);
-        printf("after wait\n");
+        printf("thread_pool_entry_2 awaken\n");
         pthread_mutex_unlock(&thread_pool_lock_);
     }
 
@@ -81,9 +74,9 @@ void test_cond_timedwait_cond_wait_no_signal(int threadNum)
     int i = 0;
     for(;i < threadNum; i++)
     {
-    	pthread_t thread_id;
-    	pthread_create(&thread_id, NULL, thread_pool_entry, NULL);
-    	sleep(1);
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, thread_pool_entry, NULL);
+        sleep(1);
     }
 
     pthread_t thread2;
@@ -111,11 +104,12 @@ void test_cond_timedwait_cond_wait_has_signal(int threadNum)
     pthread_t thread2;
     pthread_create(&thread2, NULL, thread_pool_entry_2, NULL);
 
-    int flag = 1;
+    int flag = 10;
     while(flag)
     {
         sleep(3);
         pthread_cond_signal(&thread_pool_cond_);
+        --flag;
     }
 }
 // end
