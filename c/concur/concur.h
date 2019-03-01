@@ -1,3 +1,6 @@
+#ifndef CONCUR_H
+#define CONCUR_H
+
 #include <stdio.h>
 #include <pthread.h>
 #include <errno.h>
@@ -16,3 +19,5 @@ void deadlock();
 void stopThreadPool();
 void startThreadPool();
 void signal_cond();
+
+#endif
