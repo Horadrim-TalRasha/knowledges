@@ -1,0 +1,3 @@
+BIN = $(BUILD_DIR_NAME)/Zlog_demo
+SHARE = 
+ARCHIVE = 
