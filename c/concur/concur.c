@@ -27,7 +27,7 @@ static void * thread_pool_entry(void * thread_params)
         pthread_mutex_lock(&thread_pool_lock_);
 
         struct timespec abstime;
-        clock_gettime(CLOCK_REALTIME, &abstime);
+        clock_gettime(CLOCK_MONOTONIC, &abstime);
         int timeout = 10;
         abstime.tv_sec += timeout;
         int timed_wait_ret = pthread_cond_timedwait(&thread_pool_cond_, &thread_pool_lock_, &abstime);
