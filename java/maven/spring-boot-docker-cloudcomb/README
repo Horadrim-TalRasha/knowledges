@@ -1,0 +1,12 @@
+This is a demo of spring boot.
+
+Two way to run this demo
+
+1)
+mvn package 
+java -jar target/spring-boot-docker-cloudcomb-0.1.0.jar
+
+
+2)
+mvn spring-boot:run
+
