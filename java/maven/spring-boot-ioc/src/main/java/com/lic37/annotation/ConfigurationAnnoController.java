@@ -7,13 +7,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 @RestController
 class ConfigurationAnnoController {
+    /**
+     *  To avoid this scenario that when spring container injects instances
+     *   then the instance of this object is not ready
+     **/
+    @Autowired
+    public ConfigurationAnnoController() {
+
+    }
 
     @Autowired
-	@Qualifier("ConfigAnnoStr")
+    @Qualifier("ConfigAnnoStr")
     String ConfigAnnoStr;
 
     @Autowired
-	@Qualifier("ConfigAnnoStr2")
+    @Qualifier("ConfigAnnoStr2")
     String ConfigAnnoStr2;
 
     @RequestMapping("/configanno")

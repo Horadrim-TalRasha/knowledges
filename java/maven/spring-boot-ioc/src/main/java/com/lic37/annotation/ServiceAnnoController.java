@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ServiceAnnoController {
     @Autowired
+    public ServiceAnnoController() {
+
+    }
+
+    @Autowired
     private ServiceAnnoInterface iServiceAnnoInterface;
 
     @RequestMapping("/serviceanno")
