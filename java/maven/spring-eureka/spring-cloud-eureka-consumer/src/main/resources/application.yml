@@ -1,0 +1,14 @@
+configuration:
+    eureka-provider-id: EUREKA.PROVIDER.LIC37
+
+server:
+    port: 8200
+
+spring:
+    application:
+        name: eureka.consumer.lic37
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8000/eureka        
